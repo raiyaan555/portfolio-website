@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #ebebeb;
+    --surface: #ffffff;
+    --foreground: #000000;
+    --muted: #888888;
+    --accent: #ffff00;
+  }
+
+  .dark {
+    --background: #000000;
+    --surface: #0a0a0a;
+    --foreground: #ffffff;
+    --muted: #999999;
+    --accent: #ffff00;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    cursor: none;
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
+
+  a,
+  button {
+    cursor: none;
+  }
+
+  ::selection {
+    background-color: #ffff00;
+    color: #000000;
+  }
+}
+
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .theme-transition {
+    transition: background-color 0.35s ease, color 0.35s ease,
+      border-color 0.35s ease;
+  }
+
+  .preserve-media img,
+  .preserve-media svg {
+    filter: none !important;
+  }
+
+  .hero-reveal-overlay {
+    animation: hero-reveal-fade 0.75s ease forwards;
+  }
+
+  .hero-text-animate {
+    animation: hero-text-in 0.6s ease both 0.2s;
+  }
+
+  .progress-indicator {
+    transition: left 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.45);
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.14);
+  }
+
+  .dark .progress-indicator {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.55);
+  }
+
+  .progress-tick {
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  .progress-tick:hover {
+    background: rgba(0, 0, 0, 0.28);
+  }
+
+  .dark .progress-tick {
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .dark .progress-tick:hover {
+    background: rgba(255, 255, 255, 0.32);
+  }
+
+  .copied-toast {
+    animation: copied-toast-in 0.25s ease forwards;
+  }
+
+  .page-title {
+    animation: hero-text-in 0.5s ease forwards;
+  }
+
+  .card-shadow {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .dark .card-shadow {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55), 0 2px 12px rgba(0, 0, 0, 0.35);
+  }
+
+  .toggle-track {
+    background: var(--surface);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.14), 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  .dark .toggle-track {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  }
+
+  .toggle-thumb {
+    background: var(--surface);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+
+  .dark .toggle-thumb {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  }
+
+  @media print {
+    nav,
+    footer,
+    button {
+      display: none !important;
+    }
+
+    body {
+      background: white !important;
+      color: black !important;
+    }
+
+    .resume-content {
+      box-shadow: none !important;
+      padding: 0 !important;
+    }
+  }
+}
+
+@keyframes copied-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-reveal-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes hero-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
