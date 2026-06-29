@@ -34,3 +34,9 @@ export function withBasePath(path: string): string {
   if (!path.startsWith("/") || !basePath) return path;
   return `${basePath}${path}`;
 }
+
+/** Resolve a file path relative to the public folder for the current deployment. */
+export function publicAsset(assetPath: string): string {
+  const normalized = assetPath.startsWith("/") ? assetPath : `/${assetPath}`;
+  return withBasePath(normalized);
+}

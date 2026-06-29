@@ -4,6 +4,7 @@ import ClientOnly from "@/components/ClientOnly";
 import Cursor from "@/components/Cursor";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { personal, siteUrl } from "@/lib/data";
+import { publicAsset } from "@/lib/paths";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -37,8 +38,8 @@ export const metadata: Metadata = {
     description,
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    icon: [{ url: publicAsset("favicon.svg"), type: "image/svg+xml" }],
+    apple: [{ url: publicAsset("favicon.svg"), type: "image/svg+xml" }],
   },
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import AppImage from "@/components/AppImage";
 import PageShell from "@/components/PageShell";
 import PageScrollNav from "@/components/PageScrollNav";
 import { personal, projects } from "@/lib/data";
@@ -37,7 +37,7 @@ export default function ProjectsPage() {
             >
               {project.image && (
                 <div className="preserve-media relative h-48 w-full flex-shrink-0 overflow-hidden bg-surface card-shadow theme-transition md:h-56 md:w-72">
-                  <Image
+                  <AppImage
                     src={project.image}
                     alt={project.title}
                     fill

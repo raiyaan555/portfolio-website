@@ -4,9 +4,9 @@ import AppLink from "@/components/AppLink";
 import PageShell from "@/components/PageShell";
 import PageScrollNav from "@/components/PageScrollNav";
 import { personal, resumePdf } from "@/lib/data";
-import { withBasePath } from "@/lib/paths";
+import { publicAsset } from "@/lib/paths";
 
-const resumeSrc = withBasePath(resumePdf);
+const resumeSrc = publicAsset(resumePdf);
 
 const resumeNavCtas = [
   {

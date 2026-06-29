@@ -47,7 +47,7 @@ export const education = {
   cgpa: "9.14/10",
 };
 
-export const resumePdf = "/resume/Raiyaan_Khan_SDE_CV.pdf";
+export const resumePdf = "resume/Raiyaan_Khan_SDE_CV.pdf";
 
 export const skills = [
   "Java · Spring Boot · Kafka",
@@ -80,7 +80,7 @@ export const liveProjects: Project[] = [
       "Firebase Authentication & Firestore backend",
       "Clean, responsive mobile experience built with React Native",
     ],
-    image: "/images/broscience.svg",
+    image: "images/broscience.svg",
   },
   {
     id: "pigcasso",
@@ -107,7 +107,7 @@ export const liveProjects: Project[] = [
       "Standardized project templates",
       "Integrated with internal CI/CD workflows",
     ],
-    image: "/images/connector.svg",
+    image: "images/connector.svg",
   },
   {
     id: "nirog",
@@ -121,7 +121,7 @@ export const liveProjects: Project[] = [
       "Appointment and prescription management",
       "Firebase-powered cloud synchronization",
     ],
-    image: "/images/nirog.svg",
+    image: "images/nirog.svg",
   },
   {
     id: "arcon",
@@ -135,7 +135,7 @@ export const liveProjects: Project[] = [
       "Supported 50K+ daily provisioning requests",
       "Maintained zero SLA breaches across production deployments",
     ],
-    image: "/images/arcon.svg",
+    image: "images/arcon.svg",
   },
   {
     id: "namazi-pro",
@@ -220,11 +220,20 @@ export const slides: Slide[] = [
 
 export const projects = liveProjects;
 
-export const experience = [
+export interface Experience {
+  company: string;
+  role: string;
+  period: string;
+  logo?: string;
+  highlights: string[];
+}
+
+export const experience: Experience[] = [
   {
     company: "ARCON Techsolutions",
     role: "SDE",
     period: "Jul 2024 – Present",
+    logo: "images/arcon-logo.png",
     highlights: [
       "30+ production connectors, 50K+ daily requests, zero SLA breaches",
       "API Automation Tool: 12 days → 3 days delivery",
@@ -237,6 +246,7 @@ export const experience = [
     company: "ARCON Techsolutions",
     role: "SDE Intern",
     period: "Jan – Jul 2024",
+    logo: "images/arcon-logo.png",
     highlights: [
       "On-site at City Union Bank: 5 end-to-end CI apps for 1,000+ enterprise users",
       "8+ production REST APIs; PAM, IAM, Active Directory",
