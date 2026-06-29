@@ -1,9 +1,12 @@
+export const siteUrl = "https://raiyaan555.github.io/portfolio-website";
+
 export const personal = {
   name: "Raiyaan Khan",
   role: "Software Development Engineer",
   location: "Mumbai, India",
   email: "raiyaankhan.work@gmail.com",
   tagline: "Java SDE · Distributed Systems · 2 years building at scale",
+  website: siteUrl,
   links: {
     linkedin: "https://www.linkedin.com/in/raiyaankhan",
     github: "https://github.com/raiyaan555",

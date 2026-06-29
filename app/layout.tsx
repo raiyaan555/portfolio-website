@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import ClientOnly from "@/components/ClientOnly";
 import Cursor from "@/components/Cursor";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { personal, siteUrl } from "@/lib/data";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -12,10 +13,29 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700", "800"],
 });
 
+const description =
+  "Raiyaan Khan — Software Development Engineer building scalable distributed systems in Mumbai, India.";
+
 export const metadata: Metadata = {
-  title: "Raiyaan Khan",
-  description:
-    "Raiyaan Khan — Software Development Engineer building scalable distributed systems in Mumbai, India.",
+  metadataBase: new URL(siteUrl),
+  title: personal.name,
+  description,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: personal.name,
+    description,
+    url: "/",
+    siteName: personal.name,
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: personal.name,
+    description,
+  },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/favicon.svg", type: "image/svg+xml" }],
