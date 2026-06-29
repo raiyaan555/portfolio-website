@@ -6,7 +6,7 @@ import type { Slide } from "@/lib/data";
 import { personal, liveProjects } from "@/lib/data";
 
 const CARD =
-  "h-[calc(100vh-3.75rem)] min-h-[420px] w-[94vw] max-w-[1280px] flex-shrink-0 sm:h-[calc(100vh-4rem)] sm:min-h-[480px] md:h-[78vh] md:min-h-[560px] md:w-[86vw]";
+  "flex-shrink-0 max-md:h-[calc(100dvh-5rem)] max-md:w-[92vw] max-md:max-w-none md:h-[78vh] md:min-h-[560px] md:w-[86vw] md:max-w-[1280px]";
 
 const connectLayout = [
   { key: "linkedin", label: "LinkedIn", position: "top-left" as const },
@@ -16,17 +16,20 @@ const connectLayout = [
 ];
 
 const connectTextClass =
-  "text-[clamp(1rem,2.4vw,2.75rem)] font-bold tracking-tighter transition-opacity hover:opacity-50";
+  "font-bold tracking-tighter transition-opacity hover:opacity-50 text-[clamp(1.75rem,7.5vw,3.5rem)]";
+
+const connectEmailClass =
+  "font-bold tracking-tighter transition-opacity hover:opacity-50 text-[clamp(2.25rem,11vw,5.5rem)]";
 
 const mantraTextClass =
-  "text-[clamp(1.35rem,calc(0.5rem+2.2vw),3.25rem)] font-bold leading-[1.08] tracking-tighter text-black";
+  "font-bold leading-[1.02] tracking-tighter text-black text-[clamp(1.75rem,min(9.2vh,8vw),4.25rem)]";
 
 const heroTextClass =
-  "hero-text-animate text-[clamp(2.75rem,calc(1rem+3.5vw),5rem)] font-bold leading-[1.1] tracking-tighter text-foreground";
+  "hero-text-animate font-bold leading-[1.12] tracking-tighter text-foreground max-md:text-[clamp(1.2rem,4.2vw,1.65rem)] md:text-[clamp(1.5rem,4vw,3.25rem)]";
 
 function CardLabel({ label }: { label?: string }) {
   return (
-    <div className="mb-2 flex h-6 items-end sm:mb-3 sm:h-7">
+    <div className="mb-1 flex h-5 items-end md:mb-3 md:h-7">
       {label && (
         <p className="text-xs font-bold tracking-tight text-muted sm:text-sm">
           {label}
@@ -84,12 +87,12 @@ function BoldCircleText({
     <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
       <div className="relative flex items-center justify-center">
         <span
-          className={`slide-heavy-text relative z-0 select-none whitespace-nowrap text-[clamp(3rem,18vw,22rem)] leading-[0.8] tracking-tighter ${textClassName}`}
+          className={`slide-heavy-text relative z-0 select-none whitespace-nowrap leading-[0.8] tracking-tighter max-md:text-[clamp(2.25rem,14vw,4.5rem)] md:text-[clamp(3rem,18vw,22rem)] ${textClassName}`}
         >
           {text}
         </span>
         <div
-          className={`relative z-10 -ml-[6vw] h-[clamp(4.5rem,26vw,28rem)] w-[clamp(4.5rem,26vw,28rem)] flex-shrink-0 rounded-full ${
+          className={`relative z-10 flex-shrink-0 rounded-full max-md:-ml-[5vw] max-md:h-[clamp(3.5rem,20vw,6rem)] max-md:w-[clamp(3.5rem,20vw,6rem)] md:-ml-[6vw] md:h-[clamp(4.5rem,26vw,28rem)] md:w-[clamp(4.5rem,26vw,28rem)] ${
             circleColor === "yellow" ? "bg-accent" : "bg-accent-red"
           }`}
           aria-hidden
@@ -118,7 +121,7 @@ export default function ScrollCard({ slide }: { slide: Slide }) {
   };
 
   return (
-    <div className="flex flex-shrink-0 flex-col">
+    <div className="flex flex-shrink-0 flex-col max-md:px-[4vw] md:px-0">
       <CardLabel label={isHero ? undefined : slide.label} />
 
       <CardInner
@@ -132,7 +135,7 @@ export default function ScrollCard({ slide }: { slide: Slide }) {
         } ${isHero ? "" : ""}`}
       >
         {isPhilosophy && (
-          <div className="flex h-full w-full flex-col justify-center gap-0.5 overflow-y-auto p-5 sm:gap-1 sm:p-8 md:p-12 lg:p-16">
+          <div className="flex h-full w-full flex-col justify-center gap-[0.08em] overflow-hidden px-5 py-6 md:gap-[0.1em] md:px-10 md:py-10 lg:px-14 lg:py-14">
             {slide.items?.map((mantra) => (
               <p key={mantra} className={mantraTextClass}>
                 {mantra}
@@ -142,7 +145,7 @@ export default function ScrollCard({ slide }: { slide: Slide }) {
         )}
 
         {isContact && (
-          <div className="relative h-full min-h-0 w-full p-5 sm:p-8 md:p-12 lg:p-16">
+          <div className="relative h-full min-h-0 w-full px-4 py-5 md:px-10 md:py-10 lg:px-14 lg:py-14">
             {connectLayout.map(({ key, label, position }) => (
               <a
                 key={key}
@@ -151,12 +154,12 @@ export default function ScrollCard({ slide }: { slide: Slide }) {
                 rel="noopener noreferrer"
                 className={`absolute ${connectTextClass} ${
                   position === "top-left"
-                    ? "top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 lg:top-12 lg:left-12"
+                    ? "top-4 left-4 md:top-8 md:left-8 lg:top-12 lg:left-12"
                     : position === "top-right"
-                      ? "top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 lg:top-12 lg:right-12"
+                      ? "top-4 right-4 md:top-8 md:right-8 lg:top-12 lg:right-12"
                       : position === "bottom-left"
-                        ? "bottom-4 left-4 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8 lg:bottom-12 lg:left-12"
-                        : "right-4 bottom-4 sm:right-6 sm:bottom-6 md:right-8 md:bottom-8 lg:right-12 lg:bottom-12"
+                        ? "bottom-4 left-4 md:bottom-8 md:left-8 lg:bottom-12 lg:left-12"
+                        : "right-4 bottom-4 md:right-8 md:bottom-8 lg:right-12 lg:bottom-12"
                 }`}
                 data-cursor-hover
               >
@@ -168,7 +171,7 @@ export default function ScrollCard({ slide }: { slide: Slide }) {
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="text-[clamp(1.5rem,5vw,4.5rem)] font-bold tracking-tighter transition-opacity hover:opacity-50"
+                className={connectEmailClass}
                 data-cursor-hover
               >
                 Email
@@ -202,16 +205,16 @@ export default function ScrollCard({ slide }: { slide: Slide }) {
         )}
 
         {isHero && (
-          <div className="relative flex h-full w-full flex-row">
-            <div className="relative z-10 flex w-[58%] flex-col justify-center p-5 sm:w-[60%] sm:p-6 md:w-[62%] md:p-12 lg:p-16">
+          <div className="relative flex h-full w-full flex-row overflow-hidden">
+            <div className="relative z-10 flex w-[62%] flex-col justify-center max-md:p-4 md:p-12 lg:p-16">
               <p className={heroTextClass}>{slide.body}</p>
             </div>
 
             <div
-              className="pointer-events-none absolute top-1/2 -right-[12%] z-0 -translate-y-1/2 translate-x-[10%] sm:-right-[10%] sm:translate-x-[12%] md:translate-x-[14%]"
+              className="pointer-events-none absolute top-1/2 -right-[10%] z-0 -translate-y-1/2 translate-x-[14%]"
               aria-hidden
             >
-              <div className="h-[clamp(9rem,44vw,40rem)] w-[clamp(9rem,44vw,40rem)] rounded-full bg-accent" />
+              <div className="rounded-full bg-accent max-md:h-[clamp(7rem,38vw,10rem)] max-md:w-[clamp(7rem,38vw,10rem)] md:h-[clamp(300px,52vw,640px)] md:w-[clamp(300px,52vw,640px)]" />
             </div>
           </div>
         )}

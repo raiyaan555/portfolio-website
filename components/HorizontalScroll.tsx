@@ -342,7 +342,7 @@ const HorizontalScroll = forwardRef<
   return (
     <div
       ref={viewportRef}
-      className="flex h-screen w-full touch-pan-x items-center overflow-hidden pt-11 sm:pt-12 md:pt-14"
+      className="flex h-[100dvh] w-full touch-pan-x items-center overflow-hidden pt-11 md:h-screen md:pt-14"
       style={{ touchAction: "pan-x" }}
     >
       <div
@@ -352,7 +352,7 @@ const HorizontalScroll = forwardRef<
       >
         <div
           ref={trackRef}
-          className="flex items-center gap-6 px-[3vw] will-change-transform sm:gap-8 md:gap-10 md:px-[4vw] lg:gap-12"
+          className="flex items-center gap-4 will-change-transform max-md:px-0 md:gap-10 md:px-[4vw] lg:gap-12"
           style={{ transition: "none" }}
         >
           {slides.map((slide) => (

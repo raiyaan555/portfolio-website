@@ -98,7 +98,7 @@ export default function PageScrollNav({
       />
 
       <div
-        className="page-scroll-cta-group fixed right-6 z-50 hidden flex-col gap-2 md:flex lg:right-10"
+        className="page-scroll-cta-group fixed right-4 z-50 flex flex-col gap-2 sm:right-6 lg:right-10"
         style={{ top: lineY - (ctas.length > 1 ? 22 : 14) }}
       >
         {ctas.map((cta) => (
@@ -108,7 +108,7 @@ export default function PageScrollNav({
             download={cta.download}
             target={cta.external ? "_blank" : undefined}
             rel={cta.external ? "noopener noreferrer" : undefined}
-            className="page-scroll-cta whitespace-nowrap bg-accent-red px-4 py-2 text-[11px] font-bold tracking-wide text-white transition-opacity hover:opacity-80"
+            className="page-scroll-cta max-w-[calc(100vw-2rem)] truncate whitespace-nowrap bg-accent-red px-3 py-1.5 text-[10px] font-bold tracking-wide text-white transition-opacity hover:opacity-80 sm:px-4 sm:py-2 sm:text-[11px]"
             data-cursor-hover
           >
             {cta.label}

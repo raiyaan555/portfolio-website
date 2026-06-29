@@ -81,16 +81,6 @@ export default function ProjectsPage() {
             </article>
           ))}
         </div>
-
-        <a
-          href={personal.links.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-20 inline-block text-sm font-bold text-accent-red transition-opacity hover:opacity-60 md:hidden"
-          data-cursor-hover
-        >
-          take me to Github →
-        </a>
       </div>
     </PageShell>
   );

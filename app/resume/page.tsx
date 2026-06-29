@@ -1,6 +1,5 @@
 "use client";
 
-import AppLink from "@/components/AppLink";
 import PageShell from "@/components/PageShell";
 import PageScrollNav from "@/components/PageScrollNav";
 import { personal, resumePdf } from "@/lib/data";
@@ -51,24 +50,6 @@ export default function ResumePage() {
               className="h-[85vh] w-full border-0"
             />
           </object>
-        </div>
-
-        <div className="mt-12 flex flex-col gap-3 md:hidden">
-          <AppLink
-            href={personal.links.linkedin}
-            className="text-sm font-bold text-accent-red transition-opacity hover:opacity-60"
-            data-cursor-hover
-          >
-            LinkedIn →
-          </AppLink>
-          <AppLink
-            href={resumePdf}
-            download="Raiyaan-Khan-Resume.pdf"
-            className="text-sm font-bold text-accent-red transition-opacity hover:opacity-60"
-            data-cursor-hover
-          >
-            Download Resume →
-          </AppLink>
         </div>
       </div>
     </PageShell>
