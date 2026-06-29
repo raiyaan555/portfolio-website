@@ -5,16 +5,8 @@ import AppLink from "@/components/AppLink";
 import type { Slide } from "@/lib/data";
 import { personal, liveProjects } from "@/lib/data";
 
-interface ScrollCardProps {
-  slide: Slide;
-  layout?: "horizontal" | "vertical";
-}
-
-const CARD_HORIZONTAL =
-  "h-[80vh] min-h-[560px] w-[92vw] max-w-[1280px] md:h-[78vh] md:w-[86vw]";
-
-const CARD_VERTICAL =
-  "h-auto min-h-[380px] w-full max-w-none";
+const CARD =
+  "h-[calc(100vh-3.75rem)] min-h-[420px] w-[94vw] max-w-[1280px] flex-shrink-0 sm:h-[calc(100vh-4rem)] sm:min-h-[480px] md:h-[78vh] md:min-h-[560px] md:w-[86vw]";
 
 const connectLayout = [
   { key: "linkedin", label: "LinkedIn", position: "top-left" as const },
@@ -24,16 +16,21 @@ const connectLayout = [
 ];
 
 const connectTextClass =
-  "text-[clamp(1.25rem,2.8vw,2.75rem)] font-bold tracking-tighter transition-opacity hover:opacity-50";
+  "text-[clamp(1rem,2.4vw,2.75rem)] font-bold tracking-tighter transition-opacity hover:opacity-50";
 
-const connectTextMobile =
-  "text-2xl font-bold tracking-tighter transition-opacity hover:opacity-50";
+const mantraTextClass =
+  "text-[clamp(1.35rem,calc(0.5rem+2.2vw),3.25rem)] font-bold leading-[1.08] tracking-tighter text-black";
+
+const heroTextClass =
+  "hero-text-animate text-[clamp(2.75rem,calc(1rem+3.5vw),5rem)] font-bold leading-[1.1] tracking-tighter text-foreground";
 
 function CardLabel({ label }: { label?: string }) {
   return (
-    <div className="mb-3 flex h-7 items-end">
+    <div className="mb-2 flex h-6 items-end sm:mb-3 sm:h-7">
       {label && (
-        <p className="text-sm font-bold tracking-tight text-muted">{label}</p>
+        <p className="text-xs font-bold tracking-tight text-muted sm:text-sm">
+          {label}
+        </p>
       )}
     </div>
   );
@@ -43,19 +40,17 @@ function CardInner({
   slide,
   children,
   className,
-  isVertical,
 }: {
   slide: Slide;
   children: React.ReactNode;
   className: string;
-  isVertical: boolean;
 }) {
   const article = (
     <article
-      data-scroll-card={isVertical ? undefined : true}
+      data-scroll-card
       data-cursor-hover
       className={className}
-      style={isVertical ? undefined : { scrollSnapAlign: "center" }}
+      style={{ scrollSnapAlign: "center" }}
     >
       {children}
     </article>
@@ -80,35 +75,23 @@ function BoldCircleText({
   text,
   circleColor,
   textClassName = "text-foreground",
-  compact = false,
 }: {
   text: string;
   circleColor: "yellow" | "red";
   textClassName?: string;
-  compact?: boolean;
 }) {
   return (
-    <div
-      className={`relative flex w-full items-center justify-center overflow-hidden ${
-        compact ? "min-h-[280px] py-8" : "h-full"
-      }`}
-    >
+    <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
       <div className="relative flex items-center justify-center">
         <span
-          className={`slide-heavy-text relative z-0 select-none whitespace-nowrap leading-[0.8] tracking-tighter ${
-            compact
-              ? "text-[clamp(3rem,16vw,5rem)]"
-              : "text-[clamp(6rem,28vw,22rem)]"
-          } ${textClassName}`}
+          className={`slide-heavy-text relative z-0 select-none whitespace-nowrap text-[clamp(3rem,18vw,22rem)] leading-[0.8] tracking-tighter ${textClassName}`}
         >
           {text}
         </span>
         <div
-          className={`relative z-10 flex-shrink-0 rounded-full ${
-            compact
-              ? "-ml-[5vw] h-[clamp(4rem,22vw,7rem)] w-[clamp(4rem,22vw,7rem)]"
-              : "-ml-[7vw] h-[clamp(8rem,32vw,28rem)] w-[clamp(8rem,32vw,28rem)]"
-          } ${circleColor === "yellow" ? "bg-accent" : "bg-accent-red"}`}
+          className={`relative z-10 -ml-[6vw] h-[clamp(4.5rem,26vw,28rem)] w-[clamp(4.5rem,26vw,28rem)] flex-shrink-0 rounded-full ${
+            circleColor === "yellow" ? "bg-accent" : "bg-accent-red"
+          }`}
           aria-hidden
         />
       </div>
@@ -116,12 +99,8 @@ function BoldCircleText({
   );
 }
 
-export default function ScrollCard({
-  slide,
-  layout = "horizontal",
-}: ScrollCardProps) {
+export default function ScrollCard({ slide }: { slide: Slide }) {
   const [copied, setCopied] = useState(false);
-  const isVertical = layout === "vertical";
 
   const isHero = slide.type === "hero";
   const isPhilosophy = slide.type === "philosophy";
@@ -139,37 +118,23 @@ export default function ScrollCard({
   };
 
   return (
-    <div className={`flex flex-col ${isVertical ? "w-full" : "flex-shrink-0"}`}>
+    <div className="flex flex-shrink-0 flex-col">
       <CardLabel label={isHero ? undefined : slide.label} />
 
       <CardInner
         slide={slide}
-        isVertical={isVertical}
-        className={`group relative flex flex-col theme-transition ${
-          isVertical ? CARD_VERTICAL : CARD_HORIZONTAL
-        } ${
+        className={`group relative flex flex-col overflow-hidden theme-transition ${CARD} ${
           isPhilosophy
-            ? "overflow-hidden bg-accent"
+            ? "bg-accent"
             : slide.type === "resume"
-              ? "overflow-hidden bg-accent"
-              : "card-shadow bg-surface overflow-hidden"
-        } ${isHero ? "overflow-hidden" : ""}`}
+              ? "bg-accent"
+              : "card-shadow bg-surface"
+        } ${isHero ? "" : ""}`}
       >
         {isPhilosophy && (
-          <div
-            className={`flex w-full flex-col justify-center gap-1 overflow-y-auto p-6 md:p-12 lg:p-16 ${
-              isVertical ? "min-h-[380px] py-10" : "h-full"
-            }`}
-          >
+          <div className="flex h-full w-full flex-col justify-center gap-0.5 overflow-y-auto p-5 sm:gap-1 sm:p-8 md:p-12 lg:p-16">
             {slide.items?.map((mantra) => (
-              <p
-                key={mantra}
-                className={`font-bold leading-[1.08] tracking-tighter text-black ${
-                  isVertical
-                    ? "text-[clamp(1.35rem,5vw,2rem)]"
-                    : "text-[clamp(1.75rem,3.8vw,3.25rem)]"
-                }`}
-              >
+              <p key={mantra} className={mantraTextClass}>
                 {mantra}
               </p>
             ))}
@@ -177,94 +142,55 @@ export default function ScrollCard({
         )}
 
         {isContact && (
-          <>
-            <div className="relative hidden h-full min-h-[480px] w-full p-8 md:block md:p-12 lg:p-16">
-              {connectLayout.map(({ key, label, position }) => (
-                <a
-                  key={key}
-                  href={personal.links[key as keyof typeof personal.links]}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`absolute ${connectTextClass} ${
-                    position === "top-left"
-                      ? "left-8 top-8 md:left-12 md:top-12"
-                      : position === "top-right"
-                        ? "right-8 top-8 md:right-12 md:top-12"
-                        : position === "bottom-left"
-                          ? "bottom-8 left-8 md:bottom-12 md:left-12"
-                          : "bottom-8 right-8 md:bottom-12 md:right-12"
-                  }`}
-                  data-cursor-hover
-                >
-                  {label}
-                </a>
-              ))}
+          <div className="relative h-full min-h-0 w-full p-5 sm:p-8 md:p-12 lg:p-16">
+            {connectLayout.map(({ key, label, position }) => (
+              <a
+                key={key}
+                href={personal.links[key as keyof typeof personal.links]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`absolute ${connectTextClass} ${
+                  position === "top-left"
+                    ? "top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 lg:top-12 lg:left-12"
+                    : position === "top-right"
+                      ? "top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 lg:top-12 lg:right-12"
+                      : position === "bottom-left"
+                        ? "bottom-4 left-4 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8 lg:bottom-12 lg:left-12"
+                        : "right-4 bottom-4 sm:right-6 sm:bottom-6 md:right-8 md:bottom-8 lg:right-12 lg:bottom-12"
+                }`}
+                data-cursor-hover
+              >
+                {label}
+              </a>
+            ))}
 
-              <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  className="text-[clamp(2rem,5.5vw,4.5rem)] font-bold tracking-tighter transition-opacity hover:opacity-50"
-                  data-cursor-hover
-                >
-                  Email
-                </button>
-                {copied && (
-                  <span className="copied-toast mt-3 text-sm font-bold text-muted">
-                    Copied
-                  </span>
-                )}
-              </div>
+            <div className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="text-[clamp(1.5rem,5vw,4.5rem)] font-bold tracking-tighter transition-opacity hover:opacity-50"
+                data-cursor-hover
+              >
+                Email
+              </button>
+              {copied && (
+                <span className="copied-toast mt-2 text-xs font-bold text-muted sm:mt-3 sm:text-sm">
+                  Copied
+                </span>
+              )}
             </div>
-
-            <div className="flex min-h-[380px] flex-col justify-center gap-8 p-6 md:hidden">
-              <div className="grid grid-cols-2 gap-x-4 gap-y-6">
-                {connectLayout.map(({ key, label }) => (
-                  <a
-                    key={key}
-                    href={personal.links[key as keyof typeof personal.links]}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={connectTextMobile}
-                    data-cursor-hover
-                  >
-                    {label}
-                  </a>
-                ))}
-              </div>
-              <div className="flex flex-col items-center pt-2">
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  className="text-4xl font-bold tracking-tighter transition-opacity hover:opacity-50"
-                  data-cursor-hover
-                >
-                  Email
-                </button>
-                {copied && (
-                  <span className="copied-toast mt-3 text-sm font-bold text-muted">
-                    Copied
-                  </span>
-                )}
-              </div>
-            </div>
-          </>
+          </div>
         )}
 
         {slide.type === "live-projects" && (
           <BoldCircleText
             text={featuredProject.title}
             circleColor="yellow"
-            compact={isVertical}
           />
         )}
 
         {slide.type === "work" && (
-          <BoldCircleText
-            text="Work"
-            circleColor="red"
-            compact={isVertical}
-          />
+          <BoldCircleText text="Work" circleColor="red" />
         )}
 
         {slide.type === "resume" && (
@@ -272,47 +198,20 @@ export default function ScrollCard({
             text="Resume"
             circleColor="red"
             textClassName="text-black"
-            compact={isVertical}
           />
         )}
 
         {isHero && (
-          <div
-            className={`relative flex w-full flex-col ${
-              isVertical ? "min-h-[420px]" : "h-full md:flex-row"
-            }`}
-          >
-            <div
-              className={`pointer-events-none z-0 flex justify-center ${
-                isVertical
-                  ? "order-2 px-6 pb-8 pt-4"
-                  : "absolute -right-[10%] bottom-0 md:bottom-auto md:right-0 md:top-1/2 md:-translate-y-1/2 md:translate-x-[14%]"
-              }`}
-              aria-hidden
-            >
-              <div
-                className={`rounded-full bg-accent ${
-                  isVertical
-                    ? "h-44 w-44"
-                    : "h-[clamp(300px,52vw,640px)] w-[clamp(300px,52vw,640px)]"
-                }`}
-              />
+          <div className="relative flex h-full w-full flex-row">
+            <div className="relative z-10 flex w-[58%] flex-col justify-center p-5 sm:w-[60%] sm:p-6 md:w-[62%] md:p-12 lg:p-16">
+              <p className={heroTextClass}>{slide.body}</p>
             </div>
 
             <div
-              className={`relative z-10 flex w-full flex-col justify-center p-6 md:w-[62%] md:p-12 lg:p-16 ${
-                isVertical ? "order-1 pt-8" : ""
-              }`}
+              className="pointer-events-none absolute top-1/2 -right-[12%] z-0 -translate-y-1/2 translate-x-[10%] sm:-right-[10%] sm:translate-x-[12%] md:translate-x-[14%]"
+              aria-hidden
             >
-              <p
-                className={`hero-text-animate font-bold leading-[1.12] tracking-tighter text-foreground ${
-                  isVertical
-                    ? "text-[clamp(1.5rem,6vw,2rem)]"
-                    : "text-[clamp(1.75rem,4vw,3.25rem)]"
-                }`}
-              >
-                {slide.body}
-              </p>
+              <div className="h-[clamp(9rem,44vw,40rem)] w-[clamp(9rem,44vw,40rem)] rounded-full bg-accent" />
             </div>
           </div>
         )}

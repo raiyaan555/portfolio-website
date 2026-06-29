@@ -71,6 +71,8 @@ const HorizontalScroll = forwardRef<
   const scaleVelocity = useRef(0);
   const boostPosition = useRef(0);
   const boostVelocity = useRef(0);
+  const touchLastX = useRef(0);
+  const touchActive = useRef(false);
 
   const getCardOffsets = useCallback(() => {
     const track = trackRef.current;
@@ -276,6 +278,29 @@ const HorizontalScroll = forwardRef<
       );
     };
 
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length !== 1) return;
+      touchActive.current = true;
+      touchLastX.current = e.touches[0].clientX;
+      isAnimatingToIndex.current = false;
+      scrollVelocity.current = 0;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!touchActive.current || e.touches.length !== 1) return;
+
+      e.preventDefault();
+      const x = e.touches[0].clientX;
+      const delta = touchLastX.current - x;
+      touchLastX.current = x;
+      targetX.current = clampTarget(targetX.current + delta * 1.15);
+      scrollVelocity.current = delta * 0.9;
+    };
+
+    const handleTouchEnd = () => {
+      touchActive.current = false;
+    };
+
     const handleResize = () => {
       getMetrics();
       targetX.current = clampTarget(targetX.current);
@@ -286,6 +311,10 @@ const HorizontalScroll = forwardRef<
 
     rafRef.current = requestAnimationFrame(tick);
     window.addEventListener("wheel", handleWheel, { passive: false });
+    viewport.addEventListener("touchstart", handleTouchStart, { passive: true });
+    viewport.addEventListener("touchmove", handleTouchMove, { passive: false });
+    viewport.addEventListener("touchend", handleTouchEnd, { passive: true });
+    viewport.addEventListener("touchcancel", handleTouchEnd, { passive: true });
     window.addEventListener("resize", handleResize);
     getMetrics();
     updateScrollIndex();
@@ -294,6 +323,10 @@ const HorizontalScroll = forwardRef<
     return () => {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("wheel", handleWheel);
+      viewport.removeEventListener("touchstart", handleTouchStart);
+      viewport.removeEventListener("touchmove", handleTouchMove);
+      viewport.removeEventListener("touchend", handleTouchEnd);
+      viewport.removeEventListener("touchcancel", handleTouchEnd);
       window.removeEventListener("resize", handleResize);
     };
   }, [
@@ -309,7 +342,8 @@ const HorizontalScroll = forwardRef<
   return (
     <div
       ref={viewportRef}
-      className="flex h-screen w-full items-center overflow-hidden pt-12"
+      className="flex h-screen w-full touch-pan-x items-center overflow-hidden pt-11 sm:pt-12 md:pt-14"
+      style={{ touchAction: "pan-x" }}
     >
       <div
         ref={scaleLayerRef}
@@ -318,7 +352,7 @@ const HorizontalScroll = forwardRef<
       >
         <div
           ref={trackRef}
-          className="flex items-center gap-10 px-[5vw] will-change-transform md:gap-12 md:px-[4vw]"
+          className="flex items-center gap-6 px-[3vw] will-change-transform sm:gap-8 md:gap-10 md:px-[4vw] lg:gap-12"
           style={{ transition: "none" }}
         >
           {slides.map((slide) => (
