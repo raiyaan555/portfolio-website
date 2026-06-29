@@ -1,3 +1,5 @@
+import { routes } from "@/lib/paths";
+
 export const siteUrl = "https://raiyaan555.github.io/portfolio-website";
 
 export const personal = {
@@ -183,14 +185,14 @@ export const slides: Slide[] = [
     id: "live-projects",
     type: "live-projects",
     label: "Live Projects",
-    href: "/projects",
+    href: routes.projects,
     accent: "right",
   },
   {
     id: "work",
     type: "work",
     label: "Work",
-    href: "/work",
+    href: routes.work,
     title: "ARCON Techsolutions",
     accent: "right",
   },
@@ -198,7 +200,7 @@ export const slides: Slide[] = [
     id: "resume",
     type: "resume",
     label: "Resume",
-    href: "/resume",
+    href: routes.resume,
     accent: "right",
   },
   {

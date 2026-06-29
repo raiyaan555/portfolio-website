@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { routes } from "@/lib/paths";
 
 export default function NotFound() {
   return (
@@ -6,7 +7,7 @@ export default function NotFound() {
       <h1 className="text-4xl font-bold tracking-tighter">404</h1>
       <p className="text-muted">This page doesn&apos;t exist.</p>
       <Link
-        href="/"
+        href={routes.home}
         className="text-sm font-medium underline underline-offset-4 transition-opacity hover:opacity-50"
       >
         Back home

@@ -4,12 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
 import { personal } from "@/lib/data";
+import { routes } from "@/lib/paths";
 
 const navLinks = [
-  { href: "/work", label: "Work" },
-  { href: "/projects", label: "Projects" },
-  { href: "/resume", label: "Resume" },
-  { href: "/", label: "Notes" },
+  { href: routes.work, label: "Work" },
+  { href: routes.projects, label: "Projects" },
+  { href: routes.resume, label: "Resume" },
+  { href: routes.home, label: "Notes" },
 ];
 
 function playClickSound() {
@@ -39,7 +40,7 @@ export default function Nav() {
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-5 md:px-10">
       <div className="flex items-center gap-4 md:gap-5">
         <Link
-          href="/"
+          href={routes.home}
           className="text-base font-bold tracking-tight transition-opacity hover:opacity-50"
           data-cursor-hover
           onClick={playClickSound}

@@ -1,8 +1,12 @@
 "use client";
 
+import AppLink from "@/components/AppLink";
 import PageShell from "@/components/PageShell";
 import PageScrollNav from "@/components/PageScrollNav";
 import { personal, resumePdf } from "@/lib/data";
+import { withBasePath } from "@/lib/paths";
+
+const resumeSrc = withBasePath(resumePdf);
 
 const resumeNavCtas = [
   {
@@ -37,12 +41,12 @@ export default function ResumePage() {
           data-scroll-section
         >
           <object
-            data={resumePdf}
+            data={resumeSrc}
             type="application/pdf"
             className="h-[85vh] w-full"
           >
             <iframe
-              src={resumePdf}
+              src={resumeSrc}
               title={`${personal.name} resume`}
               className="h-[85vh] w-full border-0"
             />
@@ -50,25 +54,21 @@ export default function ResumePage() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 md:hidden">
-          <a
+          <AppLink
             href={personal.links.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
             className="text-sm font-bold text-accent-red transition-opacity hover:opacity-60"
             data-cursor-hover
           >
             LinkedIn →
-          </a>
-          <a
+          </AppLink>
+          <AppLink
             href={resumePdf}
             download="Raiyaan-Khan-Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
             className="text-sm font-bold text-accent-red transition-opacity hover:opacity-60"
             data-cursor-hover
           >
             Download Resume →
-          </a>
+          </AppLink>
         </div>
       </div>
     </PageShell>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import AppLink from "@/components/AppLink";
 import type { Slide } from "@/lib/data";
 import { personal, liveProjects } from "@/lib/data";
 
@@ -62,15 +63,13 @@ function CardInner({
 
   if (slide.href) {
     return (
-      <a
+      <AppLink
         href={slide.href}
-        target="_blank"
-        rel="noopener noreferrer"
         className="block transition-opacity hover:opacity-90"
         data-cursor-hover
       >
         {article}
-      </a>
+      </AppLink>
     );
   }
 

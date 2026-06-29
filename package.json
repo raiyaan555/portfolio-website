@@ -5,7 +5,9 @@
   "homepage": "https://raiyaan555.github.io/portfolio-website/",
   "scripts": {
     "dev": "next dev",
+    "dev:pages": "NEXT_PUBLIC_BASE_PATH=/portfolio-website next dev",
     "build": "next build",
+    "build:pages": "NEXT_PUBLIC_BASE_PATH=/portfolio-website next build",
     "start": "next start",
     "lint": "next lint"
   },

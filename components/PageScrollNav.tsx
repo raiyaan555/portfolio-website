@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import AppLink from "@/components/AppLink";
 
 const TICK_COUNT = 52;
 
@@ -101,17 +102,17 @@ export default function PageScrollNav({
         style={{ top: lineY - (ctas.length > 1 ? 22 : 14) }}
       >
         {ctas.map((cta) => (
-          <a
+          <AppLink
             key={cta.label}
             href={cta.href}
             download={cta.download}
-            target="_blank"
-            rel="noopener noreferrer"
+            target={cta.external ? "_blank" : undefined}
+            rel={cta.external ? "noopener noreferrer" : undefined}
             className="page-scroll-cta whitespace-nowrap bg-accent-red px-4 py-2 text-[11px] font-bold tracking-wide text-white transition-opacity hover:opacity-80"
             data-cursor-hover
           >
             {cta.label}
-          </a>
+          </AppLink>
         ))}
       </div>
 
