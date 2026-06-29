@@ -9,6 +9,7 @@
     --foreground: #000000;
     --muted: #888888;
     --accent: #ffff00;
+    --accent-red: #ff3b00;
   }
 
   .dark {
@@ -17,6 +18,7 @@
     --foreground: #ffffff;
     --muted: #999999;
     --accent: #ffff00;
+    --accent-red: #ff3b00;
   }
 
   * {
@@ -36,9 +38,22 @@
     transition: background-color 0.35s ease, color 0.35s ease;
   }
 
+  @media (max-width: 767px), (pointer: coarse) {
+    body {
+      cursor: auto;
+    }
+  }
+
   a,
   button {
     cursor: none;
+  }
+
+  @media (max-width: 767px), (pointer: coarse) {
+    a,
+    button {
+      cursor: pointer;
+    }
   }
 
   ::selection {
@@ -109,6 +124,26 @@
 
   .page-title {
     animation: hero-text-in 0.5s ease forwards;
+  }
+
+  .slide-heavy-text {
+    font-weight: 800;
+    letter-spacing: -0.045em;
+  }
+
+  .page-scroll-line,
+  .projects-scroll-line {
+    transition: top 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .page-scroll-cta-group {
+    transition: top 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .page-scroll-cta,
+  .projects-github-cta {
+    transition: top 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 2px 8px rgba(255, 59, 0, 0.25);
   }
 
   .card-shadow {

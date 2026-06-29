@@ -11,6 +11,13 @@ export default function Cursor() {
     const el = ref.current;
     if (!el) return;
 
+    const isTouch =
+      window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+    if (isTouch) {
+      el.style.display = "none";
+      return;
+    }
+
     let raf = 0;
 
     const onMove = (e: MouseEvent) => {

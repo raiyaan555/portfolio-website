@@ -15,6 +15,7 @@ const config: Config = {
         foreground: "var(--foreground)",
         muted: "var(--muted)",
         accent: "var(--accent)",
+        "accent-red": "var(--accent-red)",
       },
       fontFamily: {
         sans: ["var(--font-poppins)", "system-ui", "sans-serif"],

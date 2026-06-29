@@ -6,9 +6,9 @@ export const personal = {
   tagline: "Java SDE · Distributed Systems · 2 years building at scale",
   links: {
     linkedin: "https://www.linkedin.com/in/raiyaankhan",
-    github: "https://github.com/raiyaankhan",
-    leetcode: "https://leetcode.com/raiyaankhan",
-    codeforces: "https://codeforces.com/profile/raiyaankhan",
+    github: "https://github.com/raiyaan555",
+    leetcode: "https://leetcode.com/u/raiyaanx/",
+    codeforces: "https://codeforces.com/profile/raiyaanx",
   },
 };
 
@@ -42,7 +42,7 @@ export const education = {
   cgpa: "9.14/10",
 };
 
-export const resumePdf = "/resume.pdf";
+export const resumePdf = "/resume/Raiyaan_Khan_SDE_CV.pdf";
 
 export const skills = [
   "Java · Spring Boot · Kafka",
@@ -53,17 +53,113 @@ export const skills = [
   "PAM · IAM · Active Directory",
 ];
 
+export interface Project {
+  id: string;
+  title: string;
+  tag: string;
+  body: string;
+  highlights: string[];
+  image?: string;
+}
+
+export const liveProjects: Project[] = [
+  {
+    id: "broscience",
+    title: "BroScience",
+    tag: "React Native · Expo · Firebase",
+    body: "A fitness tracking application built around evidence-based strength training principles. The app helps users build structured workout programs, track every set, monitor progression, and stay consistent through intelligent training analytics.",
+    highlights: [
+      "Personalized workout planning and logging",
+      "Progressive overload tracking with workout history",
+      "Personal records and training analytics",
+      "Firebase Authentication & Firestore backend",
+      "Clean, responsive mobile experience built with React Native",
+    ],
+    image: "/images/broscience.svg",
+  },
+  {
+    id: "pigcasso",
+    title: "Pigcasso",
+    tag: "React Native · Xcode · iOS",
+    body: "A screen-time reduction app that helps users break phone addiction by making device usage more mindful, intentional, and rewarding. Instead of simply blocking apps, Pigcasso encourages healthier digital habits through focused interactions and positive reinforcement.",
+    highlights: [
+      "Mindful screen-time tracking",
+      "Daily usage insights and progress monitoring",
+      "Habit-building and focus-driven experience",
+      "Native iOS optimization using Xcode",
+      "Built with React Native for a smooth cross-platform experience",
+    ],
+  },
+  {
+    id: "connector-automation",
+    title: "Connector Automation",
+    tag: "Java · Spring Boot · GitLab CI/CD",
+    body: "An internal developer platform that automates the creation of enterprise identity connectors from configuration, eliminating repetitive boilerplate code and significantly accelerating delivery.",
+    highlights: [
+      "Reduced connector delivery time from 12 days to 3 days",
+      "Cut development effort by approximately 75%",
+      "Automated connector generation and validation",
+      "Standardized project templates",
+      "Integrated with internal CI/CD workflows",
+    ],
+    image: "/images/connector.svg",
+  },
+  {
+    id: "nirog",
+    title: "Nirog",
+    tag: "Flutter · Firebase · Smart India Hackathon Finalist",
+    body: "A unified digital healthcare platform that enables secure storage and instant retrieval of patient medical records, improving accessibility during emergencies and routine healthcare visits.",
+    highlights: [
+      "Smart India Hackathon Finalist",
+      "Centralized digital health records",
+      "Emergency medical information access",
+      "Appointment and prescription management",
+      "Firebase-powered cloud synchronization",
+    ],
+    image: "/images/nirog.svg",
+  },
+  {
+    id: "arcon",
+    title: "ARCON Connectors",
+    tag: "Java · Spring Boot · REST APIs · Oracle · Kafka",
+    body: "Designed and developed enterprise provisioning connectors for identity and privileged access management, integrating enterprise applications with secure user lifecycle automation.",
+    highlights: [
+      "Built 30+ production-ready connectors",
+      "Automated user provisioning and deprovisioning",
+      "REST API and database integrations",
+      "Supported 50K+ daily provisioning requests",
+      "Maintained zero SLA breaches across production deployments",
+    ],
+    image: "/images/arcon.svg",
+  },
+  {
+    id: "namazi-pro",
+    title: "Namazi Pro",
+    tag: "Flutter · Firebase",
+    body: "A modern Islamic companion app that helps Muslims stay connected with their daily prayers through accurate prayer timings, Adhan reminders, and essential Islamic utilities in a clean, distraction-free interface.",
+    highlights: [
+      "Accurate prayer times based on location",
+      "Customizable Adhan notifications",
+      "Qibla direction support",
+      "Daily duas and Islamic reminders",
+      "Offline-friendly mobile experience",
+    ],
+  },
+];
+
 export type SlideType =
   | "hero"
-  | "project"
   | "philosophy"
-  | "work"
-  | "contact";
+  | "contact"
+  | "live-projects"
+  | "resume"
+  | "work";
 
 export interface Slide {
   id: string;
   type: SlideType;
   label?: string;
+  href?: string;
   title?: string;
   body?: string;
   tag?: string;
@@ -81,47 +177,31 @@ export const slides: Slide[] = [
     accent: "right",
   },
   {
-    id: "connector-automation",
-    type: "project",
-    label: "ARCON Techsolutions",
-    title: "Connector Automation Tool",
-    tag: "Java · Spring Boot · GitLab CI/CD",
-    body: "Eliminated manual connector builds. 12 days → 3 days. 75% fewer dev hours.",
-    image: "/images/connector.svg",
-    imageAlt: "Connector automation diagram",
+    id: "live-projects",
+    type: "live-projects",
+    label: "Live Projects",
+    href: "/projects",
     accent: "right",
   },
   {
-    id: "broscience",
-    type: "project",
-    label: "App Store",
-    title: "BroScience",
-    tag: "React Native · Firebase · Gen AI",
-    body: "Solo-shipped a full-stack fitness app with progressive overload AI. 100+ workout templates.",
-    image: "/images/broscience.svg",
-    imageAlt: "BroScience app branding",
+    id: "work",
+    type: "work",
+    label: "Work",
+    href: "/work",
+    title: "ARCON Techsolutions",
     accent: "right",
   },
   {
-    id: "nirog",
-    type: "project",
-    label: "Smart India Hackathon Finalist",
-    title: "Nirog",
-    tag: "Flutter · Firebase · REST APIs",
-    body: "Unified health records via Aarogya number. 60% faster emergency data retrieval.",
-    image: "/images/nirog.svg",
-    imageAlt: "Nirog health platform",
+    id: "resume",
+    type: "resume",
+    label: "Resume",
+    href: "/resume",
     accent: "right",
   },
   {
-    id: "arcon",
-    type: "project",
-    label: "Production Systems",
-    title: "ARCON Connectors",
-    tag: "Java · Spring Boot · Kafka",
-    body: "30+ connectors. 50,000+ daily requests. Zero SLA breaches.",
-    image: "/images/arcon.svg",
-    imageAlt: "ARCON connector network",
+    id: "contact",
+    type: "contact",
+    label: "Connect",
     accent: "right",
   },
   {
@@ -131,33 +211,9 @@ export const slides: Slide[] = [
     items: mantras,
     accent: "right",
   },
-  {
-    id: "work",
-    type: "work",
-    label: "Experience",
-    title: "ARCON Techsolutions",
-    items: [
-      "SDE · Jul 2024 – Present — 30+ connectors, 50K+ daily requests",
-      "API Automation: 12 days → 3 days delivery",
-      "35% throughput via query optimization",
-      "Kafka logging → 40% fewer incidents",
-      "SDE Intern · Jan – Jul 2024 — City Union Bank",
-      "5 CI apps for 1,000+ enterprise users",
-    ],
-    image: "/images/work.svg",
-    imageAlt: "Work experience timeline",
-    accent: "right",
-  },
-  {
-    id: "contact",
-    type: "contact",
-    label: "Connect",
-    title: "Connect",
-    accent: "right",
-  },
 ];
 
-export const projects = slides.filter((s) => s.type === "project");
+export const projects = liveProjects;
 
 export const experience = [
   {
@@ -183,4 +239,3 @@ export const experience = [
     ],
   },
 ];
-
